@@ -31,19 +31,56 @@
       <slot></slot>
     </main>
     <footer-partial></footer-partial>
+    <!-- Modals -->
+    <modal :show="modals.login" @close-modal="closeModal">
+      <h2 class="text-grey-darkest font-semibold text-center mb-6">
+        Welcome to Platzi Rooms
+      </h2>
+      <form>
+        <div class="mb-4">
+          <label class="imput__label">Email</label>
+        </div>
+        <div class="form__field mb-8">
+          <input class="input__field" type="text" placeholder="example@domain.com">
+        </div>
+        <div class="mb-4">
+          <label class="imput__label">Password</label>
+        </div>
+        <div class="form__field mb-4">
+          <input class="input__field" type="password" placeholder="**************">
+        </div>
+        <div class="mb-4">
+          <button class="btn btn-primary mr-3 w-full">Login</button>
+        </div>
+      </form>
+    </modal>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import HeaderPartial from '@/partials/HeaderPartial.vue';
 import FooterPartial from '@/partials/FooterPartial.vue';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: 'DefaultLayout',
   components: {
     HeaderPartial,
     FooterPartial,
+    Modal
   },
+  computed: {
+    ...mapGetters(['modals'])
+  },
+  methods: {
+    closeModal () {
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: 'login',
+        value: false
+      })
+    }
+  }
 };
 </script>
 
