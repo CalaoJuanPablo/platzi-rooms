@@ -18,22 +18,12 @@
       <div class="container">
         <h1 class="text-3xl font-light mb-3">Explore all</h1>
         <div class="search__content grid-container mb-8">
-          <div class="house__card mb-3" v-for="i in 12" :key="i">
-            <div class="house__thumbnail relative overflow-hidden">
-              <img class="house__image absolute w-full" width="250" src="https://images.unsplash.com/photo-1432303492674-642e9d0944b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=80">
-            </div>
-            <div class="house__content bg-white p-3 border rounded">
-              <div class="house__type font-semibold text-xs uppercase text-teal-dark mb-1">
-                Private Room
-              </div>
-              <div class="house__title font-bold mb-2">
-                Guest Suite in Historic Architecture Home
-              </div>
-              <div class="house__price text-xs">
-                <span class="font-bold">$592 MXN</span> per night
-              </div>
-            </div>
-          </div>
+          <house-card
+            class="house__card mb-3"
+            v-for="room in rooms"
+            :key="room['.key']"
+            :room="room">
+          </house-card>
         </div>
         <div class="text-center">
           <a
@@ -48,12 +38,18 @@
 
 <script>
 import PageLayout from '@/layouts/PageLayout.vue';
+import { mapGetters } from 'vuex';
+import HouseCard from '@/components/HouseCard.vue'
 
 export default {
   name: 'SearchPage',
   components: {
     PageLayout,
+    HouseCard
   },
+  computed: {
+    ...mapGetters(['rooms'])
+  }
 };
 </script>
 
