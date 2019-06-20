@@ -8,13 +8,29 @@
         <label class="imput__label">Email</label>
       </div>
       <div class="form__field mb-8">
-        <input class="input__field" type="text" placeholder="example@domain.com">
+        <input
+          class="input__field"
+          type="text"
+          placeholder="example@domain.com"
+          v-model="formLogin.email"
+        >
       </div>
       <div class="mb-4">
         <label class="imput__label">Password</label>
       </div>
       <div class="form__field mb-4">
-        <input class="input__field" type="password" placeholder="**************">
+        <input
+          class="input__field"
+          type="password"
+          placeholder="**************"
+          v-model="formLogin.password"
+        >
+      </div>
+      <div class="mb-4">
+        <label class="imput__label">Remember me</label>
+      </div>
+      <div class="mb-4">
+        <toggle-input v-model="formLogin.rememberMe"></toggle-input>
       </div>
       <div class="mb-4">
         <button class="btn btn-primary mr-3 w-full">Login</button>
@@ -24,7 +40,21 @@
 </template>
 
 <script>
+import ToggleInput from '@/components/ToggleInput.vue'
 export default {
-  name: 'LoginModal'
+  name: 'LoginModal',
+  components: {
+    ToggleInput
+  },
+  data () {
+
+    return {
+      formLogin: {
+        email: '',
+        password: '',
+        rememberMe: false
+      }
+    }
+  }
 }
 </script>
