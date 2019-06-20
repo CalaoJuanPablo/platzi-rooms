@@ -12,9 +12,9 @@ export default {
     <div class="modal-wrapper">
       <div class="modal">
         <div class="modal-head text-right pb-2">
-          <a href="#" onClick={this.onClose}>
-            <i class="material-icons">close</i>
-          </a>
+          <div onClick={this.onClose}>
+            <i class="material-icons exit-modal">close</i>
+          </div>
         </div>
         <div class="modal-content">
           {this.$slots.default}
@@ -51,5 +51,8 @@ export default {
   width: 100vw;
   height: 100vh;
   background: rgba(37, 37, 37, 0.8);
+}
+.exit-modal {
+  cursor: pointer;
 }
 </style>
