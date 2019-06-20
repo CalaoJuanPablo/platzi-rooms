@@ -17,7 +17,7 @@
           <aside class="profile__aside px-3">
             <div class="profile__card">
               <div class="profile__thumbnail">
-                <img class="profile__image w-full" src="https://avatars1.githubusercontent.com/u/9919?s=500&v=4">
+                <img class="profile__image w-full" :src="profile.avatar" :alt="profile.username">
               </div>
             </div>
           </aside>
@@ -26,13 +26,13 @@
               <div class="mb-4">
                 <label class="input__label" for="name">Name</label>
                 <div class="form__field relative">
-                  <input class="input__field" id="name" type="text" placeholder="Bruce Wayne">
+                  <input class="input__field" id="name" type="text" placeholder="Buce Wayne" v-model="profile.name">
                 </div>
               </div>
               <div class="mb-4">
                 <label class="input__label" for="username">Username</label>
                 <div class="form__field relative">
-                  <input class="input__field" id="username" type="text" placeholder="bruce.wayne">
+                  <input class="input__field" id="username" type="text" placeholder="bruce.wayne" v-model="profile.username">
                 </div>
               </div>
               <div class="mb-4">
@@ -40,7 +40,7 @@
                   class="input__label"
                   for="avatar">Avatar</label>
                 <div class="form__field relative">
-                  <input class="input__field" id="avatar" type="text" placeholder="https://avatars1.githubusercontent.com/u/9919?s=500&v=4">
+                  <input class="input__field" id="avatar" type="text" placeholder="https://avatars1.githubusercontent.com/u/9919?s=500&v=4" v-model="profile.avatar">
                 </div>
               </div>
               <div class="mb-4">
@@ -52,7 +52,8 @@
                     class="input__field"
                     id="email"
                     type="text"
-                    placeholder="bruce.wayne@imnotbatman.org">
+                    placeholder="bruce.wayne@imnotbatman.com"
+                    v-model="profile.email">
                 </div>
               </div>
               <div class="mb-4">
@@ -65,7 +66,10 @@
                     rows="5"
                     id="email"
                     type="text"
-                    placeholder="bruce.wayne@imnotbatman.org"></textarea>
+                    placeholder="I am not Batman"
+                    v-model="profile.bio"
+                  >
+                  </textarea>
                 </div>
               </div>
               <div class="flex items-center w-auto mb-4">
@@ -88,12 +92,32 @@
 
 <script>
 import PageLayout from '@/layouts/PageLayout.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProfilePage',
   components: {
     PageLayout,
   },
+  data () {
+    return {
+      profile: {
+        avatar: '',
+        bio: '',
+        name: '',
+        username: '',
+        email: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'authUser'
+    })
+  },
+  mounted () {
+    this.profile = this.user
+  }
 };
 </script>
 <style>
