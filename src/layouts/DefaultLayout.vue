@@ -32,27 +32,11 @@
     </main>
     <footer-partial></footer-partial>
     <!-- Modals -->
-    <modal :show="modals.login" @close-modal="closeModal">
-      <h2 class="text-grey-darkest font-semibold text-center mb-6">
-        Welcome to Platzi Rooms
-      </h2>
-      <form>
-        <div class="mb-4">
-          <label class="imput__label">Email</label>
-        </div>
-        <div class="form__field mb-8">
-          <input class="input__field" type="text" placeholder="example@domain.com">
-        </div>
-        <div class="mb-4">
-          <label class="imput__label">Password</label>
-        </div>
-        <div class="form__field mb-4">
-          <input class="input__field" type="password" placeholder="**************">
-        </div>
-        <div class="mb-4">
-          <button class="btn btn-primary mr-3 w-full">Login</button>
-        </div>
-      </form>
+    <modal :show="modals.login" @close-modal="closeModal('login')">
+      <login-modal></login-modal>
+    </modal>
+    <modal :show="modals.signup" @close-modal="closeModal('signup')">
+      <register-modal></register-modal>
     </modal>
   </div>
 </template>
@@ -61,22 +45,26 @@
 import { mapGetters } from 'vuex'
 import HeaderPartial from '@/partials/HeaderPartial.vue';
 import FooterPartial from '@/partials/FooterPartial.vue';
-import Modal from '@/components/Modal.vue';
+import Modal from '@/containers/Modal.vue';
+import LoginModal from '@/components/modals/LoginModal.vue';
+import RegisterModal from '@/components/modals/RegisterModal.vue';
 
 export default {
   name: 'DefaultLayout',
   components: {
     HeaderPartial,
     FooterPartial,
-    Modal
+    Modal,
+    LoginModal,
+    RegisterModal
   },
   computed: {
     ...mapGetters(['modals'])
   },
   methods: {
-    closeModal () {
+    closeModal (modalName) {
       this.$store.dispatch('TOGGLE_MODAL_STATE', {
-        name: 'login',
+        name: modalName,
         value: false
       })
     }

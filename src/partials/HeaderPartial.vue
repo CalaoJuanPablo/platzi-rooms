@@ -27,7 +27,7 @@
             <div v-else>
               <button class="btn__outline btn__outline--teal rounded mr-2" @click.prevent="getLogin">Login</button>
               <button
-                class="bg-yellow-dark text-yellow-darker font-semibold py-2 px-4 rounded">
+                class="bg-yellow-dark text-yellow-darker font-semibold py-2 px-4 rounded" @click.prevent="getSignup">
                 Register</button>
             </div>
           </div>
@@ -52,8 +52,11 @@ export default {
         value: true
       })
     },
-    signUp() {
-      console.log('Sign Up Click');
+    getSignup() {
+      this.$store.dispatch('TOGGLE_MODAL_STATE', {
+        name: 'signup',
+        value: true
+      })
     },
   },
 };
