@@ -9,7 +9,7 @@
         </div>
         <div class="flex items-center w-auto">
           <div class="items__controls">
-            <div class="flex" v-if="false">
+            <div class="flex" v-if="user">
               <button class="mr-2 flex items-center">
                 <i class="material-icons">add</i>
               </button>
@@ -17,9 +17,9 @@
                 <i class="material-icons">notifications</i>
               </button>
               <div class="flex items-center">
-                <img class="w-8 h-8 rounded-full mr-2" src="https://avatars2.githubusercontent.com/u/1901273?s=460&v=4" alt="Avatar of Javier Diaz">
+                <img class="w-8 h-8 rounded-full mr-2" :src="user.avatar" :alt="`Avatar of ${user.name}`">
                 <div class="text-sm">
-                  <p class="text-black leading-none">Javier Diaz</p>
+                  <p class="text-black leading-none">{{ user.name }}</p>
                   <p class="text-grey-dark">Online</p>
                 </div>
               </div>
@@ -38,12 +38,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'HeaderPartial',
   data() {
     return {
       isAuthenticated: true,
     };
+  },
+  computed: {
+    ...mapGetters({
+      user: 'authUser'
+    })
   },
   methods: {
     getLogin() {
