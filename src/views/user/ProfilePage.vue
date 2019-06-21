@@ -16,8 +16,11 @@
         <div class="grid-container">
           <aside class="profile__aside px-3">
             <div class="profile__card">
-              <div class="profile__thumbnail">
+              <div class="profile__thumbnail mb-2">
                 <img class="profile__image w-full" :src="profile.avatar" :alt="profile.username">
+              </div>
+              <div class="text-lg">
+                <span class="font-semibold">{{ userRoomsCount }}</span> rooms
               </div>
             </div>
           </aside>
@@ -113,7 +116,10 @@ export default {
   computed: {
     ...mapGetters({
       user: 'authUser'
-    })
+    }),
+    userRoomsCount () {
+      this.$store.getters.userRoomsCount(this.user['.key'])
+    }
   },
   mounted () {
     this.profile = this.user
