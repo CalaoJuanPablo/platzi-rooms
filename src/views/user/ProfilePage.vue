@@ -118,7 +118,7 @@ export default {
       user: 'authUser'
     }),
     userRoomsCount () {
-      this.$store.getters.userRoomsCount(this.user['.key'])
+      return this.$store.getters.userRoomsCount(this.user['.key'])
     }
   },
   mounted () {
