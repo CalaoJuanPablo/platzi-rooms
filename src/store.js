@@ -53,12 +53,15 @@ export default new Vuex.Store({
 
       instance.get()
         .then((snapshopt) => {
-          /* const rooms = snapshopt.val();
-          Object.keys(rooms).forEach(roomId => {
-            const room = rooms[roomId];
-          }) */
-          console.log(snapshopt);
-        });
+          snapshopt.forEach((room) => {
+            commit('SET_ITEM', {
+              item: room.data(),
+              id: room.id,
+              resource: 'rooms',
+            });
+          });
+        })
+        .then(() => resolve(Object.values(state.rooms)));
     }),
   },
   getters: {
