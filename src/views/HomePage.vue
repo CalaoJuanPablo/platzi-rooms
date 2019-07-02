@@ -45,6 +45,9 @@ export default {
     TinySlider,
     HouseCard
   },
+  beforeCreate () {
+    this.$store.dispatch('FETCH_ROOMS', 12);
+  },
   computed: {
     ...mapGetters(['rooms'])
   }

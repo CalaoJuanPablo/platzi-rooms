@@ -47,6 +47,9 @@ export default {
     PageLayout,
     HouseCard
   },
+  beforeCreate () {
+    this.$store.dispatch('FETCH_ROOMS');
+  },
   computed: {
     ...mapGetters(['rooms'])
   }
