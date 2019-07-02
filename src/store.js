@@ -63,6 +63,19 @@ export default new Vuex.Store({
         })
         .then(() => resolve(Object.values(state.rooms)));
     }),
+    FETCH_USER: ({ state, commit }, { id }) => new Promise((resolve) => {
+      const userRef = firebase.firestore().collection('users').doc(id);
+
+      userRef.get()
+        .then((user) => {
+          commit('SET_ITEM', {
+            item: user.data(),
+            id: user.id,
+            resource: 'users',
+          });
+        })
+        .then(() => resolve(Object.values(state.users[id])));
+    }),
   },
   getters: {
     modals: state => state.modals,
