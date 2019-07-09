@@ -38,11 +38,26 @@ export default new Vuex.Store({
     },
     CREATE_ROOM: ({ state, commit }, room) => {
       const newRoom = room;
-      const roomId = `room${Math.random()}`;
-      newRoom['.key'] = roomId;
       newRoom.userId = state.authId;
-      commit('SET_ROOM', { newRoom, roomId });
-      commit('APPEND_ROOM_TO_USER', { roomId, userId: newRoom.userId });
+      newRoom.publishedAt = Math.floor(Date.now() / 1000);
+      newRoom.meta = { likes: 0 };
+
+      function setRoomToUser(roomId) {
+        firebase.firestore().collection('users').doc(state.authId).set({
+          rooms: {
+            [roomId]: roomId,
+          },
+        }, { merge: true })
+          .catch(err => console.log('Error in setRoomToUser: ', err));
+      }
+
+      firebase.firestore().collection('rooms').add(newRoom)
+        .then(docRef => docRef.id)
+        .then((roomId) => {
+          setRoomToUser(roomId);
+          commit('SET_ROOM', { newRoom, roomId });
+          commit('APPEND_ROOM_TO_USER', { roomId, userId: newRoom.userId });
+        });
     },
     FETCH_ROOMS: ({ state, commit }, limit) => new Promise((resolve) => {
       let instance = firebase.firestore().collection('rooms');
