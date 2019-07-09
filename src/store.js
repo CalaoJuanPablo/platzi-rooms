@@ -57,6 +57,7 @@ export default new Vuex.Store({
           setRoomToUser(roomId);
           commit('SET_ROOM', { newRoom, roomId });
           commit('APPEND_ROOM_TO_USER', { roomId, userId: newRoom.userId });
+          return Promise.resolve(state.rooms[roomId]);
         });
     },
     FETCH_ROOMS: ({ state, commit }, limit) => new Promise((resolve) => {
