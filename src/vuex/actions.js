@@ -28,6 +28,19 @@ export default {
         return Promise.resolve(state.rooms[roomId]);
       });
   },
+  CREATE_USER: ({ state, commit }, { email, name, password }) => new Promise((resolve) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((account) => {
+        const id = account.user.uid;
+        const registeredAt = Math.floor(Date.now() / 10000);
+        const newUser = {email, name, registeredAt };
+        firebase.firestore().collection('users').doc(id).set(newUser, { merge: true })
+          .then(() => {
+            commit('SET_ITEM', { resource: 'users', id, item: newUser });
+            resolve(state.users[id]);
+          });
+      });
+  }),
   FETCH_ROOMS: ({ state, commit }, limit) => new Promise((resolve) => {
     let instance = firebase.firestore().collection('rooms');
 
