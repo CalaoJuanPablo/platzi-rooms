@@ -22,7 +22,8 @@
             </div>
             <button
               class="px-2 py-4 bg-yellow-dark font-semibold w-full rounded text-yellow-darker">
-              Search</button>
+              Search
+            </button>
           </form>
         </div>
       </div>
