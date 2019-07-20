@@ -15,4 +15,7 @@ export default {
     newItem['.key'] = id;
     Vue.set(state[resource], id, newItem);
   },
+  SET_AUTHID: (state, { id }) => {
+    state.authId = id;
+  },
 };

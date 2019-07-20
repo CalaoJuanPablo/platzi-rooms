@@ -73,4 +73,20 @@ export default {
       })
       .then(() => resolve(Object.values(state.users[id])));
   }),
+  FETCH_AUTH_USER: ({ dispatch, commit }) => {
+    const userId = firebase.auth().currentUser.uid;
+    dispatch('FETCH_USER', { id: userId })
+      .then(() => {
+        commit('SET_AUTHID', userId);
+      });
+  },
+  SIGN_IN: (context, { email, password }) => {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  },
+  LOG_OUT({ commit }) {
+    return firebase.auth().signOut()
+      .then(() => {
+        commit('SET_AUTHID', null);
+      });
+  },
 };

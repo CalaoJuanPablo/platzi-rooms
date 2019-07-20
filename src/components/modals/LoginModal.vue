@@ -3,7 +3,7 @@
     <h2 class="text-grey-darkest font-semibold text-center mb-6">
       Welcome to Platzi Rooms
     </h2>
-    <form>
+    <form @submit.prevent="handleLoginSubmit">
       <div class="mb-4">
         <label class="imput__label">Email</label>
       </div>
@@ -47,13 +47,26 @@ export default {
     ToggleInput
   },
   data () {
-
     return {
       formLogin: {
         email: '',
         password: '',
         rememberMe: false
       }
+    }
+  },
+  methods: {
+    handleLoginSubmit() {
+      this.$store.dispatch('SIGN_IN', {
+        email: this.formLogin.email,
+        password: this.formLogin.password,
+      })
+        .then(() => {
+          this.$store.dispatch('TOGGLE_MODAL_STATE', {
+            name: 'login',
+            value: false
+          })
+        })
     }
   }
 }
