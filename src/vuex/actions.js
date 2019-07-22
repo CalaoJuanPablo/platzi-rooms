@@ -80,8 +80,8 @@ export default {
         commit('SET_AUTHID', userId);
       });
   },
-  SIGN_IN: (context, { email, password }) => {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+  SIGN_IN(context, { email, password }) {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
   },
   LOG_OUT({ commit }) {
     return firebase.auth().signOut()
