@@ -5,10 +5,12 @@
     </h2>
     <form @submit.prevent="handleLoginSubmit">
       <div class="mb-4">
-        <label class="imput__label">Email</label>
+        <label class="imput__label" for="email">Email</label>
       </div>
       <div class="form__field mb-8">
         <input
+          id="email"
+          name="email"
           class="input__field"
           type="text"
           placeholder="example@domain.com"
@@ -16,10 +18,12 @@
         >
       </div>
       <div class="mb-4">
-        <label class="imput__label">Password</label>
+        <label class="imput__label" for="pass">Password</label>
       </div>
       <div class="form__field mb-4">
         <input
+          id="pass"
+          name="password"
           class="input__field"
           type="password"
           placeholder="**************"
