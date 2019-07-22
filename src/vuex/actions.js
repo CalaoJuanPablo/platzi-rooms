@@ -33,7 +33,7 @@ export default {
       .then((account) => {
         const id = account.user.uid;
         const registeredAt = Math.floor(Date.now() / 10000);
-        const newUser = {email, name, registeredAt };
+        const newUser = { email, name, registeredAt };
         firebase.firestore().collection('users').doc(id).set(newUser, { merge: true })
           .then(() => {
             commit('SET_ITEM', { resource: 'users', id, item: newUser });
@@ -81,7 +81,7 @@ export default {
       });
   },
   SIGN_IN(context, { email, password }) {
-    return firebase.auth().signInWithEmailAndPassword(email, password)
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   },
   LOG_OUT({ commit }) {
     return firebase.auth().signOut()
