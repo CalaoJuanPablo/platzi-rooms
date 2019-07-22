@@ -37,7 +37,7 @@
         <toggle-input v-model="formLogin.rememberMe"></toggle-input>
       </div>
       <div class="mb-4">
-        <button class="btn btn-primary mr-3 w-full">Login</button>
+        <button class="btn btn-primary mr-3 w-full" type="submit">Login</button>
       </div>
     </form>
   </div>

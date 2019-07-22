@@ -22,13 +22,16 @@
               <button class="mr-4 flex items-center">
                 <i class="material-icons">notifications</i>
               </button>
-              <div class="flex items-center">
+              <div class="flex items-center mr-4">
                 <img class="w-8 h-8 rounded-full mr-2" :src="user.avatar" :alt="`Avatar of ${user.name}`">
                 <div class="text-sm">
                   <p class="text-black leading-none">{{ user.name }}</p>
                   <p class="text-grey-dark">Online</p>
                 </div>
               </div>
+              <button class="flex item-center" @click.prevent="handleLogout">
+                <i class="material-icons">exit_to_app</i>
+              </button>
             </div>
             <div v-else>
               <button class="btn__outline btn__outline--teal rounded mr-2" @click.prevent="getLogin">Login</button>
@@ -71,6 +74,9 @@ export default {
         value: true
       })
     },
+    handleLogout() {
+      this.$store.dispatch('LOG_OUT')
+    }
   },
 };
 </script>
